@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import BookCreate from './components/BookCreate';
+import BookList from './components/BookList';
 
 
 function App() {
   const [books, setBooks] = useState([]);
 
-  const updatedBooks = [...books, ]
   
   const createBook = (title) => {
+    // We only do this because we don;t ahve a backend database generating an ID
+    const id = Math.round(Math.random() * 999);
+    const updatedBooks = [...books, { id: id, title }];
     setBooks(updatedBooks);
-    console.log('Book title: ', title);
   };
 
   const editBook = () => {
@@ -22,7 +24,8 @@ function App() {
 	
   return(
 
-    <div>
+    <div className="app">
+      <BookList books={books}/>
       <BookCreate onCreate={createBook} />
     </div>
   );
